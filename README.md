@@ -510,7 +510,69 @@ No external APIs, cloud servers, or third-party inference services are required.
 Since all inference is executed locally, the only runtime cost is the computational resources of the user's own device.
 
 ---
+# Production Considerations
 
+Although the current implementation was developed using a relatively small custom dataset, several design considerations would improve the robustness and scalability of the system in a real-world deployment.
+
+---
+
+## Keeping the Model Accurate as Cheaters Adapt
+
+Fraud patterns continuously evolve as users discover new ways to bypass verification systems. To maintain long-term performance, the detector should be updated through continuous data collection and periodic retraining.
+
+Potential improvements include:
+
+- Collecting newly observed fraud samples from production.
+- Expanding the dataset with different display technologies such as LCD, OLED, AMOLED, Mini-LED, and e-ink displays.
+- Including images captured under diverse lighting conditions, camera angles, and exposure settings.
+- Performing hard-negative mining by focusing on images that the current model finds difficult to classify.
+- Periodically retraining the model using newly collected examples to adapt to changing fraud patterns.
+
+Continuous monitoring and incremental retraining would help maintain strong detection performance as new attack strategies emerge.
+
+---
+
+## Optimizing for Mobile Deployment
+
+Although the current ResNet34 model performs real-time inference on a CPU, additional optimizations would further improve mobile deployment.
+
+Possible optimizations include:
+
+- Exporting the trained model to TorchScript or ONNX.
+- Applying INT8 quantization to reduce model size and improve inference speed.
+- Using TensorFlow Lite or Core ML for mobile deployment.
+- Replacing ResNet34 with MobileNetV3 or EfficientNet-Lite when lower computational requirements are preferred.
+- Applying model pruning to reduce memory consumption without significantly affecting accuracy.
+
+These optimizations would allow the detector to run efficiently on smartphones while maintaining low latency.
+
+---
+
+## Selecting the Decision Threshold
+
+The deployed model currently uses a default decision threshold of **0.50**.
+
+Images with prediction scores:
+
+- below **0.50** are classified as genuine photographs.
+- above **0.50** are classified as screen recaptures.
+
+In a production fraud detection system, this threshold should be determined using validation data rather than being fixed arbitrarily.
+
+Several factors influence the optimal threshold:
+
+- The acceptable false positive rate.
+- The acceptable false negative rate.
+- Business requirements.
+- User experience.
+
+Receiver Operating Characteristic (ROC) and Precision–Recall analyses can be used to identify an operating point that provides the desired balance between fraud detection and user convenience.
+
+For applications where missing fraudulent images is more costly than incorrectly flagging genuine users, a lower threshold may be selected to increase recall.
+
+Conversely, if minimizing false alarms is more important, the threshold can be increased to improve precision.
+
+---
 # Repository Structure
 
 ```text
@@ -535,12 +597,13 @@ RealVsScreenDetection/
 ├── notebooks/
 │   ├── 01_EDA.ipynb
 │   ├── 02_Feature_Engineering.ipynb
-│   ├── 03_Model_Training.ipynb
-│   ├── 04_Transfer_Learning.ipynb
-│   ├── 05_ResNet18_5Fold.ipynb
-│   ├── 06_ResNet34_5Fold.ipynb
-│   ├── 07_Final_Model_Training.ipynb
-│   └── 08_Model_Evaluation.ipynb
+│   ├── 03_Classical_ML_Models.ipynb
+│   ├── 04_ResNet18_Train_Test_Split.ipynb
+│   ├── 05_MobileNetV3_Experiments.ipynb
+│   ├── 06_ResNet18_5Fold_CV.ipynb
+│   ├── 07_ResNet34_5Fold_CV.ipynb
+│   └── 08_Final_ResNet34_Training.ipynb
+|   └── 09_EfficientNetB0_Experiments.ipynb
 │
 ├── predict.py
 ├── app.py
@@ -555,7 +618,7 @@ RealVsScreenDetection/
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/<Riruru612>/RealVsScreenDetection.git
+git clone https://github.com/Riruru612/RealVsScreenDetection.git
 
 cd RealVsScreenDetection
 ```
