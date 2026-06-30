@@ -68,7 +68,7 @@ The dataset was intentionally balanced to avoid class imbalance during training.
 ## Sample Real Photographs
 
 <p align="center">
-<img src="assets/real_samples.jpeg" width="900">
+<img src="assets/real_samples.png" width="900">
 </p>
 
 ---
@@ -76,7 +76,7 @@ The dataset was intentionally balanced to avoid class imbalance during training.
 ## Sample Screen Recapture Photographs
 
 <p align="center">
-<img src="assets/screen_samples.jpeg" width="900">
+<img src="assets/screen_samples.png" width="900">
 </p>
 
 ---
@@ -392,7 +392,7 @@ streamlit run app.py
 The example below shows a genuine photograph correctly classified by the deployed model.
 
 <p align="center">
-<img src="assets/app_real_prediction.png" width="1000">
+<img src="assets/streamlit_real_prediction.png" width="1000">
 </p>
 
 ---
@@ -402,7 +402,7 @@ The example below shows a genuine photograph correctly classified by the deploye
 The example below shows a photograph of a digital screen correctly identified as a screen recapture.
 
 <p align="center">
-<img src="assets/app_screen_prediction.png" width="1000">
+<img src="assets/streamlit_screen_prediction.png" width="1000">
 </p>
 
 ---
@@ -412,7 +412,7 @@ The example below shows a photograph of a digital screen correctly identified as
 The deployed application also provides evaluation metrics, benchmark results, deployment information, and model details.
 
 <p align="center">
-<img src="assets/app_dashboard.png" width="1000">
+<img src="assets/streamlit_dashboard.png" width="1000">
 </p>
 
 ---
@@ -555,7 +555,7 @@ RealVsScreenDetection/
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/RealVsScreenDetection.git
+git clone https://github.com/<Riruru612>/RealVsScreenDetection.git
 
 cd RealVsScreenDetection
 ```
