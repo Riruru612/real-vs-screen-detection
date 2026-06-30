@@ -7,9 +7,6 @@ import torch.nn as nn
 from PIL import Image
 from torchvision import models, transforms
 
-# ============================================================
-# Page Configuration
-# ============================================================
 
 st.set_page_config(
     page_title="Spot the Fake Photo",
@@ -18,9 +15,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ============================================================
-# Custom CSS
-# ============================================================
 
 st.markdown(
     """
@@ -51,17 +45,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ============================================================
-# Device
-# ============================================================
-
 device = torch.device(
     "cuda" if torch.cuda.is_available() else "cpu"
 )
 
-# ============================================================
-# Image Transform
-# ============================================================
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -72,9 +59,6 @@ transform = transforms.Compose([
     )
 ])
 
-# ============================================================
-# Load Model
-# ============================================================
 
 @st.cache_resource
 def load_model():
@@ -104,9 +88,6 @@ def load_model():
 
 model = load_model()
 
-# ============================================================
-# Prediction Function
-# ============================================================
 
 def predict(image):
 
@@ -141,9 +122,6 @@ def predict(image):
 
     return score, latency
 
-# ============================================================
-# Sidebar
-# ============================================================
 
 with st.sidebar:
 
