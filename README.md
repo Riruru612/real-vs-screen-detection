@@ -341,12 +341,25 @@ For this reason, **ResNet34** was selected as the final deployment model.
 
 The final network was retrained using the complete dataset (102 images) to maximize the available training data before deployment.
 
+```
+
+The final network was retrained using the complete dataset (102 images) to maximize the available training data before deployment.
+
+### Final Training Results
+
+| Metric | Value |
+
+|--------|-------:|
+
+| **Training Accuracy** | **100.00%** |
+
+The perfect training accuracy indicates that the final model successfully learned the available training samples. Since training accuracy alone does not reflect generalization performance, the **Stratified 5-Fold Cross Validation metrics reported below are considered the primary measure of model quality.**
+
 Final model weights:
 
 ```text
-models/final_resnet34_detector.pth
-```
 
+models/final_resnet34_detector.pth
 ---
 
 # Model Performance
